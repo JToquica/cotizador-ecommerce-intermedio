@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización Ecommerce</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { padding: 20px; }
+        .container { max-width: 800px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Cotización Ecommerce</h2>
+        <h4>🛠 Precio Base: $3.500.000 COP</h4>
+        <form id="cotizacionForm">
+            <div class="mb-3">
+                <label class="form-label fw-bold">📄 Páginas y Secciones Adicionales</label>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="250000"> Sección Preguntas Frecuentes (FAQ) (+$250.000) </div>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="250000"> Sección Testimonios o Reseñas (+$250.000) </div>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="300000"> Página Nosotros / Quiénes Somos (+$300.000) </div>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="400000"> Página Blog o Noticias (+$400.000) </div>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="350000"> Página Galería o Portafolio (+$350.000) </div>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="300000"> Página de Servicios (+$300.000) </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">📦 Gestión de Productos</label>
+                <select id="productos" class="form-select">
+                    <option value="0">Hasta 20 productos (Incluido)</option>
+                    <option value="450000">21 - 50 productos (+$450.000)</option>
+                    <option value="800000">51 - 100 productos (+$800.000)</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">💳 Pagos y Envíos</label>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="300000"> Integración de múltiples pasarelas de pago (+$300.000) </div>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="200000"> Configuración de métodos de envío (+$200.000) </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">🎁 Funcionalidades Extra</label>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="200000"> Sistema de cupones y descuentos (+$200.000) </div>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="150000"> Reseñas y calificaciones de productos (+$150.000) </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">🔒 Seguridad y Hosting</label>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="100000"> Certificado SSL + Seguridad avanzada (+$100.000) </div>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="400000"> Hosting y dominio (1 año) (+$400.000) </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">🛠 Soporte y Mantenimiento</label>
+                <div class="form-check"> <input class="form-check-input extra" type="checkbox" value="750000"> Soporte extendido 3 meses (+$750.000) </div>
+            </div>
+            <h3 class="mt-4">💰 Total: <span id="total">$3.500.000</span> COP</h3>
+            <button type="button" class="btn btn-primary mt-3" onclick="imprimirCotizacion()">Imprimir / Guardar PDF</button>
+        </form>
+    </div>
+
+    <script>
+        const precioBase = 3500000;
+        const extras = document.querySelectorAll(".extra");
+        const productos = document.getElementById("productos");
+        const totalSpan = document.getElementById("total");
+
+        function calcularTotal() {
+            let total = precioBase + parseInt(productos.value);
+            extras.forEach(extra => { if (extra.checked) total += parseInt(extra.value); });
+            totalSpan.textContent = `$${total.toLocaleString("es-CO")}`;
+        }
+
+        extras.forEach(extra => extra.addEventListener("change", calcularTotal));
+        productos.addEventListener("change", calcularTotal);
+
+        function imprimirCotizacion() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
